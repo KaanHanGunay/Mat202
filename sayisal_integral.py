@@ -1,6 +1,6 @@
 import math
 
-from utils import isaret
+from utils import isaret, cizgiyi_ciz
 
 
 def sayisal_integral_dikdortgen(baslangic, bitis, h):
@@ -128,15 +128,6 @@ def simpson_cift(h, baslangic, bitis):
 
     toplam = round(toplam * ilk_katsayi, 5)
     print(func_write + result_str, '=', toplam)
-
-
-def cizgiyi_ciz(baslangic, bitis, h):
-    cizgi_str = ''
-    while baslangic <= bitis:
-        cizgi_str += f'{round(baslangic, 5)}===='
-        baslangic += h
-
-    print(cizgi_str)
 
 
 def func(deger):

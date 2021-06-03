@@ -8,3 +8,12 @@ def deger_bul(deger, keys, values):
         if i == deger:
             return values[index]
     return None
+
+
+def cizgiyi_ciz(baslangic, bitis, h):
+    cizgi_str = ''
+    while baslangic <= bitis:
+        cizgi_str += f'{round(baslangic, 5)}===='
+        baslangic += h
+
+    print(cizgi_str)
