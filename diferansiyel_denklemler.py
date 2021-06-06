@@ -7,16 +7,10 @@ import math
 from utils import cizgiyi_ciz, deger_bul
 
 
-def difaresiyel_euler(istenen_deger, aralik, h, *args):
-    keys = []
-    values = []
-
-    for i in args:
-        keys.append(i[0])
-        values.append(i[1])
-
-    if aralik is None:
-        aralik = aralik_olustur(keys[0], istenen_deger)
+def difaresiyel_euler(istenen_deger, h, verilen_nokta, func):
+    keys = [verilen_nokta[0]]
+    values = [verilen_nokta[1]]
+    aralik = aralik_olustur(keys[0], istenen_deger)
 
     cizgiyi_ciz(aralik[0], aralik[1], h)
 
@@ -33,16 +27,10 @@ def difaresiyel_euler(istenen_deger, aralik, h, *args):
         keys.append(deger)
 
 
-def difaresiyel_heun_duzeltilmis_euler(istenen_deger, aralik, h, *args):
-    keys = []
-    values = []
-
-    for i in args:
-        keys.append(i[0])
-        values.append(i[1])
-
-    if aralik is None:
-        aralik = aralik_olustur(keys[0], istenen_deger)
+def difaresiyel_heun_duzeltilmis_euler(istenen_deger, h, verilen_nokta, func):
+    keys = [verilen_nokta[0]]
+    values = [verilen_nokta[1]]
+    aralik = aralik_olustur(keys[0], istenen_deger)
 
     cizgiyi_ciz(aralik[0], aralik[1], h)
     deger = aralik[0]
@@ -67,16 +55,10 @@ def difaresiyel_heun_duzeltilmis_euler(istenen_deger, aralik, h, *args):
         keys.append(deger)
 
 
-def runge_kutta(istenen_deger, aralik, h, *args):
-    keys = []
-    values = []
-
-    for i in args:
-        keys.append(i[0])
-        values.append(i[1])
-
-    if aralik is None:
-        aralik = aralik_olustur(keys[0], istenen_deger)
+def runge_kutta(istenen_deger, h, verilen_nokta, func):
+    keys = [verilen_nokta[0]]
+    values = [verilen_nokta[1]]
+    aralik = aralik_olustur(keys[0], istenen_deger)
 
     cizgiyi_ciz(aralik[0], aralik[1], h)
     deger = aralik[0]
@@ -100,7 +82,3 @@ def runge_kutta(istenen_deger, aralik, h, *args):
 
 def aralik_olustur(baslangic, istenen_deger):
     return tuple((baslangic, istenen_deger))
-
-
-def func(t, y):
-    return (math.e**(-1 * t))/(1 + y)
