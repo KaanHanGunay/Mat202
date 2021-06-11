@@ -3,21 +3,23 @@ import math
 from utils import isaret, cizgiyi_ciz
 
 
-def sayisal_integral_dikdortgen(baslangic, bitis, h):
+def sayisal_integral_dikdortgen(baslangic, bitis, h, func):
     result = 0
     index = 0
+    s_str = ''
     while baslangic <= (bitis - h):
         func_res = round((h * func(baslangic)), 5)
-        print(f'S{index} = (x{index + 1}-x{index}) * f(x{index}) = {h} * {func_res} = {h * func_res}')
-        result += (h * func_res)
+        s_str += f'S{index} + '
+        print(f'S{index} = (x{index + 1}-x{index}) * f(x{index}) = {h} * {func_res} = {round(h * func_res, 5)}')
+        result += round(h * func_res, 5)
         baslangic += h
         index += 1
 
     result = round(result, 5)
-    print(f'Sonuç = {result}')
+    print(f'Sonuç = {s_str[:-3]} = {result}')
 
 
-def sayisal_integral_yamuk(baslangic, bitis, h):
+def sayisal_integral_yamuk(baslangic, bitis, h, func):
     result = 0
     index = 0
     func_write = f'S ≈ {h / 2}['
@@ -51,18 +53,18 @@ def sayisal_integral_yamuk(baslangic, bitis, h):
     print(func_write)
 
 
-def simpson(baslanbic, bitis, nokta_sayisi):
-    h = (bitis - baslanbic) / (nokta_sayisi - 1)
+def simpson(baslangic, bitis, nokta_sayisi, func):
+    h = (bitis - baslangic) / (nokta_sayisi - 1)
     print('h değeri =>', round(h, 5))
-    cizgiyi_ciz(baslanbic, bitis, h)
+    cizgiyi_ciz(baslangic, bitis, h)
 
     if nokta_sayisi % 2 == 1:
-        simpson_tek(h, baslanbic, bitis)
+        simpson_tek(h, baslangic, bitis, func)
     else:
-        simpson_cift(h, baslanbic, bitis)
+        simpson_cift(h, baslangic, bitis, func)
 
 
-def simpson_tek(h, baslangic, bitis):
+def simpson_tek(h, baslangic, bitis, func):
     print('Simpson 1/3 kuralı')
     ilk_katsayi = round((h / 3), 5)
     result_str = f' = {ilk_katsayi}('
@@ -98,7 +100,7 @@ def simpson_tek(h, baslangic, bitis):
     print(func_write + result_str, '=', toplam)
 
 
-def simpson_cift(h, baslangic, bitis):
+def simpson_cift(h, baslangic, bitis, func):
     print('Simpson 3/8 kuralı')
     ilk_katsayi = round((3 * h / 8), 5)
     result_str = f' = {ilk_katsayi}('
@@ -129,6 +131,3 @@ def simpson_cift(h, baslangic, bitis):
     toplam = round(toplam * ilk_katsayi, 5)
     print(func_write + result_str, '=', toplam)
 
-
-def func(deger):
-    return deger**5

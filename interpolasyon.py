@@ -5,7 +5,7 @@ def lineer_iterpolasyon(a_noktasi, b_noktasi, istenen_deger):
     egim = (b_noktasi[1] - a_noktasi[1]) / (b_noktasi[0] - a_noktasi[0])
     print(f'm = {egim}')
     print(f'y = {a_noktasi[1]} {isaret(egim)} {egim}*(x {"+" if a_noktasi[0] < 0 else "-"} {a_noktasi[0]})')
-    sonuc = egim * (istenen_deger - a_noktasi[0]) + a_noktasi[1]
+    sonuc = round(egim * (istenen_deger - a_noktasi[0]) + a_noktasi[1], 5)
     print(f'f({istenen_deger}) ≈ p ({istenen_deger}) = {sonuc}')
     return sonuc
 
@@ -25,6 +25,8 @@ def kuadratik_interpolasyon(a_noktasi, b_noktasi, c_noktasi, istenen_deger):
         (((c_noktasi[1] - a_noktasi[1]) / (c_noktasi[0] - a_noktasi[0]) * (c_noktasi[0] - b_noktasi[0])) -
          ((b_noktasi[1] - a_noktasi[1]) / (b_noktasi[0] - a_noktasi[0]) * (c_noktasi[0] - b_noktasi[0]))) * \
         (istenen_deger - a_noktasi[0]) * (istenen_deger - b_noktasi[0])
+
+    sonuc = round(sonuc, 5)
 
     print(f'f({istenen_deger}) ≈ p ({istenen_deger}) = {sonuc}')
     return sonuc
