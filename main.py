@@ -4,17 +4,37 @@ from yaklasik_turev import *
 from interpolasyon import *
 from sayisal_integral import *
 from diferansiyel_denklemler import *
+from sistem_sayisal_yontemler import *
 
 
 def sayisal_integral_fonksiyonu(x):
-    return x**5
+    return x ** 5
 
 
 def diferansiyel_denklemler_fonksiyonu(t, y):
-    return (math.sin(t) - (5 * y**2)) / 3
+    return (math.sin(t) - (5 * y ** 2)) / 3
+
+
+def func_for_x(y, z):
+    result = round((15 - y - (5 * z)) / 2, 5)
+    print(f'(15 - {y} - (5 * {z})) / 2 = {result}')
+    return result
+
+
+def func_for_y(x, z):
+    result = round((-21 - (4 * x) - z) / (-8), 5)
+    print(f'(-21 - (4 * {x}) - {z}) / (-8) = {result}')
+    return result
+
+
+def func_for_z(x, y):
+    result = round(7 + y - (4 * x), 5)
+    print(f'7 + {y} - (4 * {x}) = {result}')
+    return result
 
 
 if __name__ == '__main__':
+    """
     # İnterpolasyon
     # Lineer İnterpolasyon
     lineer_iterpolasyon((2, 7), (3, 11), 7)
@@ -69,3 +89,6 @@ if __name__ == '__main__':
     # Runge Kutta Yöntemi
     runge_kutta(istenen_deger=0.9, h=0.3, verilen_nokta=(0.3, 5), func=diferansiyel_denklemler_fonksiyonu)
     print('#############################################')
+    """
+
+    jacobi(baslangic_noktasi=(0, 0, 0), istenen_deger=2, matris=[[20, 1, -2], [3, 20, -1], [2, -3, 20]], sonuclar=[17, -18, 25])
