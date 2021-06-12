@@ -1,29 +1,37 @@
-def jacobi_esas(baslangic_noktasi, istenen_deger, func_for_x, func_for_y, func_for_z):
-    x_degerleri = [baslangic_noktasi[0]]
-    y_degerleri = [baslangic_noktasi[1]]
-    z_degerleri = [baslangic_noktasi[2]]
+def jacobi_esas(baslangic_noktasi, istenen_deger, fonksiyonlar):
+    degerler = []
 
-    result_str = 'k\t\tx\t\ty\t\tz\t\t\n'
+    for i in baslangic_noktasi:
+        degerler.append([i])
+
+    print('k\t\t', end='')
+    for i in range(len(baslangic_noktasi)):
+        print(f'x{i}\t\t', end='')
+    print('')
+
     index = 0
-    while index < istenen_deger:
-        x_degeri = round(func_for_x(y_degerleri[index], z_degerleri[index]), 5)
-        x_degerleri.append(x_degeri)
+    while index <= istenen_deger:
 
-        y_degeri = round(func_for_y(x_degerleri[index], z_degerleri[index]), 5)
-        y_degerleri.append(y_degeri)
+        print(index, '\t\t', end='')
+        for i in range(len(fonksiyonlar)):
+            liste = index_disindaki_degerler(i, degerler, index)
+            degerler[i].append(round(fonksiyonlar[i](liste), 5))
 
-        z_degeri = round(func_for_z(x_degerleri[index], y_degerleri[index]), 5)
-        z_degerleri.append(z_degeri)
-
-        result_str += f'{index + 1}\t\t{x_degerleri[index + 1]}\t\t{y_degerleri[index + 1]}\t\t{z_degerleri[index + 1]}\n'
-
+        for i in range(len(baslangic_noktasi)):
+            print(f'{degerler[i][-1]}\t\t', end='')
+        print('')
         index += 1
 
-    print(result_str)
+
+def index_disindaki_degerler(index, degerler, bulunulan_index):
+    liste = []
+    for i, deger in enumerate(degerler):
+        if i != index:
+            liste.append(deger[bulunulan_index])
+    return liste
 
 
 def jacobi(baslangic_noktasi, istenen_deger, matris, sonuclar):
-
     duzeltme_secimleri = []
     for i in matris:
         duzeltme_secimleri.append(jacobi_duzeltmesi(satir=i))
@@ -43,18 +51,27 @@ def jacobi(baslangic_noktasi, istenen_deger, matris, sonuclar):
             else:
                 kucuk_degerler.append(matris[index][i])
 
+        print(f'x{buyuk_pozisyon + 1} => ', end='')
+        fonksiyonlar[buyuk_pozisyon] = create_function(sonuclar[index], buyuk_deger, kucuk_degerler)
 
-        print(f'{buyuk_pozisyon} => (({sonuclar[index]}) + (-1 * {kucuk_degerler[0]} * x) + (-1 * {kucuk_degerler[1]} * y)) / {buyuk_deger}')
-
-        fonksiyonlar[buyuk_pozisyon] = create_function(sonuclar[index], kucuk_degerler[0], kucuk_degerler[1], buyuk_deger)
-
-    jacobi_esas(baslangic_noktasi=baslangic_noktasi, istenen_deger=istenen_deger, func_for_x=fonksiyonlar[0],
-                func_for_y=fonksiyonlar[1], func_for_z=fonksiyonlar[2])
+    jacobi_esas(baslangic_noktasi=baslangic_noktasi, istenen_deger=istenen_deger, fonksiyonlar=fonksiyonlar)
 
 
-def create_function(a, b, c, d):
-    def func(x, y):
-        return (a + (-1 * b * x) + (-1 * c * y)) / d
+def create_function(sonuc, buyuk_deger, kucuk_degerler):
+    func_str = f'({sonuc} + '
+    for index, deger in enumerate(kucuk_degerler):
+        func_str += f'(-1 * {deger} + x{index + 1}) + '
+
+    func_str = func_str[:-2] + f') / {buyuk_deger}'
+    print(func_str)
+
+    def func(liste):
+        s = sonuc
+        for index, arg in enumerate(liste):
+            d = -1 * kucuk_degerler[index] * arg
+            s += d
+        return s / buyuk_deger
+
     return func
 
 
