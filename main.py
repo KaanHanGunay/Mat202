@@ -15,24 +15,6 @@ def diferansiyel_denklemler_fonksiyonu(t, y):
     return (math.sin(t) - (5 * y ** 2)) / 3
 
 
-def func_for_x(y, z):
-    result = round((15 - y - (5 * z)) / 2, 5)
-    print(f'(15 - {y} - (5 * {z})) / 2 = {result}')
-    return result
-
-
-def func_for_y(x, z):
-    result = round((-21 - (4 * x) - z) / (-8), 5)
-    print(f'(-21 - (4 * {x}) - {z}) / (-8) = {result}')
-    return result
-
-
-def func_for_z(x, y):
-    result = round(7 + y - (4 * x), 5)
-    print(f'7 + {y} - (4 * {x}) = {result}')
-    return result
-
-
 if __name__ == '__main__':
     """
     # İnterpolasyon
@@ -89,10 +71,15 @@ if __name__ == '__main__':
     # Runge Kutta Yöntemi
     runge_kutta(istenen_deger=0.9, h=0.3, verilen_nokta=(0.3, 5), func=diferansiyel_denklemler_fonksiyonu)
     print('#############################################')
+   
+
+    # Sistem Sayısal Yöntemler
+    # Jacobi Yöntemi
+    jacobi(baslangic_noktasi=(2, -1, 1), istenen_deger=7, matris=[[15, 5, -5], [5, 20, 10], [-5, 5, 15]],
+           sonuclar=[29, -3, -7])
+    print('#############################################')
     """
-
-    jacobi(baslangic_noktasi=(0, 0, 0, 0), istenen_deger=7,
-           matris=[[3, -2, -2, 15], [2, -13, 1, -2], [11, 2, -1, 1], [1, -1, 9, 1]], sonuclar=[1, -25, 16, -10])
-
-    print('####################################')
-    jacobi((1, 2, 2), 6, [[2, 1, 5], [4, -8, 1], [4, -1, 1]], [15, -21, 7])
+    # Gauss-Siedel Yöntemler
+    gauss_siedel(baslangic_noktasi=(2, -1, 1), istenen_deger=7, matris=[[15, 5, -5], [5, 20, 10], [-5, 5, 15]],
+                 sonuclar=[29, -3, -7])
+    print('#############################################')
