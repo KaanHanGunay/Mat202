@@ -5,6 +5,7 @@ from interpolasyon import *
 from sayisal_integral import *
 from diferansiyel_denklemler import *
 from sistem_sayisal_yontemler import *
+from yaklasik_deger_bulma import *
 
 
 def sayisal_integral_fonksiyonu(x):
@@ -13,6 +14,18 @@ def sayisal_integral_fonksiyonu(x):
 
 def diferansiyel_denklemler_fonksiyonu(t, y):
     return (math.sin(t) - (5 * y ** 2)) / 3
+
+
+def yakalsik_deger_bulma_fonksiyonu(x):
+    return (x ** 2) - math.sin(x) - 1
+
+
+def yakalsik_deger_bulma_fonksiyonu_turev(x):
+    return (2 * x) - math.cos(x)
+
+
+def yakalsik_deger_bulma_fonksiyonu_ikinci_turev(x):
+    return math.sin(x) + 2
 
 
 if __name__ == '__main__':
@@ -71,15 +84,31 @@ if __name__ == '__main__':
     # Runge Kutta Yöntemi
     runge_kutta(istenen_deger=0.9, h=0.3, verilen_nokta=(0.3, 5), func=diferansiyel_denklemler_fonksiyonu)
     print('#############################################')
-   
 
     # Sistem Sayısal Yöntemler
     # Jacobi Yöntemi
     jacobi(baslangic_noktasi=(2, -1, 1), istenen_deger=7, matris=[[15, 5, -5], [5, 20, 10], [-5, 5, 15]],
            sonuclar=[29, -3, -7])
     print('#############################################')
-    """
+    
     # Gauss-Siedel Yöntemler
     gauss_siedel(baslangic_noktasi=(2, -1, 1), istenen_deger=7, matris=[[15, 5, -5], [5, 20, 10], [-5, 5, 15]],
                  sonuclar=[29, -3, -7])
     print('#############################################')
+    
+    # Yaklaşık Deger Bulma
+    # Aralık Yarılama
+    epsilon = 3 * (10 ** -4)
+    aralik_yarilama_yontemi(func=yakalsik_deger_bulma_fonksiyonu, bolzano_araligi=None, epsilon=epsilon)
+    print('#############################################')
+    
+    epsilon = 3 * (10 ** -4)
+    newton_raphson(func=yakalsik_deger_bulma_fonksiyonu, func_turev=yakalsik_deger_bulma_fonksiyonu_turev,
+                   func_ikinci_turev=yakalsik_deger_bulma_fonksiyonu_ikinci_turev, epsilon=epsilon, bolzano_araligi=None)
+    print('#############################################')
+    """
+    epsilon = 1 * (10 ** -4)
+    newton_raphson(func=yakalsik_deger_bulma_fonksiyonu, func_turev=yakalsik_deger_bulma_fonksiyonu_turev,
+                   func_ikinci_turev=yakalsik_deger_bulma_fonksiyonu_ikinci_turev, epsilon=epsilon,
+                   bolzano_araligi=None)
+    print('########################################### ##')
