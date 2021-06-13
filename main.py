@@ -6,6 +6,7 @@ from sayisal_integral import *
 from diferansiyel_denklemler import *
 from sistem_sayisal_yontemler import *
 from yaklasik_deger_bulma import *
+from lu_donusumu import *
 
 
 def sayisal_integral_fonksiyonu(x):
@@ -106,9 +107,9 @@ if __name__ == '__main__':
     newton_raphson(func=yakalsik_deger_bulma_fonksiyonu, func_turev=yakalsik_deger_bulma_fonksiyonu_turev,
                    func_ikinci_turev=yakalsik_deger_bulma_fonksiyonu_ikinci_turev, epsilon=epsilon, bolzano_araligi=None)
     print('#############################################')
+    
+    # LU Yöntemi
+    lu_donusumu([[2, 3, 5], [3, 4, 7], [1, 3, 2]], [3, 6, 5])
+    print('#############################################')
     """
-    epsilon = 1 * (10 ** -4)
-    newton_raphson(func=yakalsik_deger_bulma_fonksiyonu, func_turev=yakalsik_deger_bulma_fonksiyonu_turev,
-                   func_ikinci_turev=yakalsik_deger_bulma_fonksiyonu_ikinci_turev, epsilon=epsilon,
-                   bolzano_araligi=None)
-    print('########################################### ##')
+    pass
